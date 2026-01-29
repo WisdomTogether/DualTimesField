@@ -2,7 +2,7 @@
 
 **Rethinking the Nature of Time Series: A Dual Neural Field Perspective**
 
-DualTimesField proposes that time series signals inherently consist of two complementary components—smooth continuous manifolds and sparse geometric events. By combining Implicit Neural Representations (INR) with learnable Gabor atoms, we achieve efficient compression, accurate interpolation, and interpretable decomposition.
+Effective time series representation is critical for revealing temporal dynamics in many fields. However, existing approaches encounter fundamental limitations. Discrete-time representations struggle with irregular sampling and the tradeoff of fidelity and efficiency, while traditional implicit neural representations suffer from spectral bias and frequency entanglement. To address these challenges, we conceptualize time series as the superposition of continuous trends and discrete events from a continuous-time perspective and propose DualTimesField, a framework that utilizes dual implicit neural fields. Its Continuous Time Field captures smooth trends through bandwidth-limited parameterization, while a Discrete Geometric Field  models transient events using learnable Gabor atoms, gated sparsity, and coarse-to-fine scale annealing. This explicit field separation effectively overcomes both limitations. Experiments on nine real-world benchmarks demonstrate substantial improvements in representation fidelity, achieving 51.2\% average MSE reduction over discrete-time baselines and competitive interpolation on irregular data
 
 ## Overview
 
@@ -17,7 +17,10 @@ $$
 | **CTF** | Continuous Time Field for smooth trends | Band-limited Fourier features + MLP |
 | **DGF** | Discrete Geometric Field for sparse events | Learnable Gabor atoms with gate mechanism |
 
-![DualTimesField architecture.](pics/DualTimesField.png)
+<figure>
+  <img src="pics/DualTimesField.png" alt="DualTimesField architecture.">
+  <figcaption>DualTimesField architecture.</figcaption>
+</figure>
 
 ## Key Features
 
