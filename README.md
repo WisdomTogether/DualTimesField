@@ -17,6 +17,8 @@ $$
 | **CTF** | Continuous Time Field for smooth trends | Band-limited Fourier features + MLP |
 | **DGF** | Discrete Geometric Field for sparse events | Learnable Gabor atoms with gate mechanism |
 
+![DualTimesField architecture.](pics/DualTimesField.png)
+
 ## Key Features
 
 - **Dual-field decomposition**: Separates smooth trends from sparse transient events
