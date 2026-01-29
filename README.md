@@ -24,7 +24,7 @@ $$
 
 - **Dual-field decomposition**: Separates smooth trends from sparse transient events
 - **Dynamic sparsity**: Gate mechanism adaptively selects active atoms based on signal complexity
-- **Multiple tasks**: Supports both compression/reconstruction and interpolation
+- **Multiple tasks**: Supports both reconstruction and interpolation
 - **High accuracy**: Achieves state-of-the-art results on PhysioNet and USHCN interpolation benchmarks
 - **Interpretable representation**: Each Gabor atom has explicit location, scale, frequency, and amplitude
 - **Advanced visualization**: T-SNE, PCA, error heatmaps, and temporal analysis
@@ -39,10 +39,10 @@ pip install -r requirements.txt
 
 ## Quick Start
 
-### Compression/Reconstruction
+### Reconstruction
 
 ```bash
-# Train compression model
+# Train model
 python -m reconstruction.train --datasets ETTh1 ETTh2 --epochs 300
 
 # Evaluate trained model
@@ -79,7 +79,7 @@ DualTimesField/
 │   ├── trainer.py              # Training utilities
 │   └── utils/                  # Helper functions
 │
-├── reconstruction/             # Compression/reconstruction task
+├── reconstruction/             # Reconstruction task
 │   ├── datasets.py             # Data loaders
 │   ├── baselines.py            # Baseline models (SIREN, WIRE, N-BEATS, etc.)
 │   ├── train.py                # Training script
@@ -269,7 +269,7 @@ predictions = model.predict(sample['times'])
 
 ```bibtex
 @article{dualtimesfield2026,
-  title={DualTimesField: Dual Neural Field for Time Series Compression and Interpolation},
+  title={DualTimesField: Rethinking Time Series as Continuous-Time Trends and Events},
   author={},
   journal={},
   year={2026}
