@@ -247,23 +247,7 @@ predictions = model.predict(sample['times'])
 
 Typical model size: ~35K parameters ($D=7$, $K=16$, $M=16$, $H=64$). Training: 2–5 min for reconstruction (300 epochs, batch 32) and 10–30 min per sample for interpolation (500 epochs) on a single RTX 3090.
 
-## Citation
-
-If you find this work useful, please cite:
-
-```bibtex
-@inproceedings{zhang2026dualtimesfield,
-  title     = {DualTimesField: Rethinking Time Series as Continuous-Time Trends and Events},
-  author    = {Zhang, Wencheng and Li, Long and Qin, Huayi and Wu, Zongjuan and Li, Jing and Chen, Wanghu},
-  booktitle = {Proceedings of the 43rd International Conference on Machine Learning (ICML)},
-  series    = {Proceedings of Machine Learning Research},
-  year      = {2026},
-  address   = {Seoul, South Korea},
-  publisher = {PMLR},
-}
-```
-
-## Citation
+## 🥳Citation
 
 If you find this work useful, please cite:
 
