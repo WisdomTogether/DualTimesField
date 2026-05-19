@@ -12,16 +12,16 @@ DualTimesField conceptualizes time series as the superposition of continuous tre
 
 ## Overview
 
-A signal is decomposed via two complementary neural fields:
+Time series signals exhibit a fundamental **dual structure**:
 
 $$
-\hat{\mathbf{x}}(t) = \Phi_{\text{CTF}}(t;\theta_c) + \Psi_{\text{DGF}}(t;\theta_d)
+\mathbf{x}(t) = \Phi_{\text{CTF}}(t) + \Psi_{\text{DGF}}(t)
 $$
 
 | Component | Description | Mathematical Basis |
 |-----------|-------------|-------------------|
-| **CTF** (Continuous Time Field) | Smooth, low-frequency trends | Bandwidth-limited learnable Fourier features + low-pass filtering + MLP |
-| **DGF** (Discrete Geometric Field) | Sparse, localized transient events | Learnable Gabor atoms with gated sparsity + coarse-to-fine scale annealing |
+| **CTF** | Continuous Time Field for smooth trends | Band-limited Fourier features + MLP |
+| **DGF** | Discrete Geometric Field for sparse events | Learnable Gabor atoms with gate mechanism |
 
 ## Key Features
 
@@ -153,7 +153,7 @@ DualTimesField achieves the best MSE on all 9 benchmarks, with a 51.2% average M
 ### Interpolation on Irregularly Sampled Data (MSE $\times 10^{-3}$)
 
 <p align="center">
-  <img src="pics/interpolation.png" alt="Interpolation results" width="95%">
+  <img src="pics/interpolation.png" alt="Interpolation results" width="60%">
 </p>
 
 Best on 5 of 6 datasets. On PhysioNet, DualTimesField cuts MSE by 52.4% over LS4. On EPA-Air and Human Activity, the margin exceeds 90%. USHCN remains slightly better for state-space methods (LS4, CRU), which aligns with our design intuition: USHCN is dominated by smooth seasonal patterns with few localized events, the regime where explicit event modeling has limited returns.
@@ -246,6 +246,22 @@ predictions = model.predict(sample['times'])
 | Sparsity weight | $\lambda_s$ | 0.001 | Gradient clip norm | — | 1.0 |
 
 Typical model size: ~35K parameters ($D=7$, $K=16$, $M=16$, $H=64$). Training: 2–5 min for reconstruction (300 epochs, batch 32) and 10–30 min per sample for interpolation (500 epochs) on a single RTX 3090.
+
+## Citation
+
+If you find this work useful, please cite:
+
+```bibtex
+@inproceedings{zhang2026dualtimesfield,
+  title     = {DualTimesField: Rethinking Time Series as Continuous-Time Trends and Events},
+  author    = {Zhang, Wencheng and Li, Long and Qin, Huayi and Wu, Zongjuan and Li, Jing and Chen, Wanghu},
+  booktitle = {Proceedings of the 43rd International Conference on Machine Learning (ICML)},
+  series    = {Proceedings of Machine Learning Research},
+  year      = {2026},
+  address   = {Seoul, South Korea},
+  publisher = {PMLR},
+}
+```
 
 ## Citation
 
