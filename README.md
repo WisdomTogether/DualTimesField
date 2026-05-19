@@ -30,7 +30,7 @@ $$
 - **Gated sparse event modeling** — context-dependent amplitudes and gates adaptively activate atoms based on signal complexity
 - **Coarse-to-fine scale annealing** — atoms first localize broadly, then sharpen, avoiding the non-convexity of narrow basis functions
 - **Continuous-time inference** — query at arbitrary timestamps, native support for irregular sampling
-- **Interpretable atoms** — each active Gabor atom has explicit \((\tau, \sigma, \omega, \phi)\) semantics for event location, duration, frequency, phase
+- **Interpretable atoms** — each active Gabor atom has explicit $(\tau, \sigma, \omega, \phi)$ semantics for event location, duration, frequency, phase
 
 ## Installation
 
@@ -121,24 +121,24 @@ DualTimesField/
 
 ### Continuous Time Field (CTF)
 
-- Learnable Fourier features with explicit cutoff: \(f_k = \sigma(b_k) \cdot f_{\max}\)
-- Frequency-domain low-pass filtering with smooth rolloff (cutoff at \(N/16\)) to avoid Gibbs artifacts
+- Learnable Fourier features with explicit cutoff: $f_k = \sigma(b_k) \cdot f_{\max}$
+- Frequency-domain low-pass filtering with smooth rolloff (cutoff at $N/16$) to avoid Gibbs artifacts
 - Parallel time/data MLP encoders fused into the trend output
 - First-order temporal smoothness regularization
 
 ### Discrete Geometric Field (DGF)
 
-- Gabor atoms: \(g_k(t) = \exp\!\left(-\frac{(t-\tau_k)^2}{2\sigma_k^2}\right)\cos(\omega_k(t-\tau_k) + \phi_k)\)
-- Context-conditioned amplitudes \(A \in \mathbb{R}^{M\times D}\) and gates \(z \in \mathbb{R}^M\) from observed mean
-- Sparsity loss with target activation \(\rho = 0.3\)
+- Gabor atoms: $g_k(t) = \exp\!\left(-\frac{(t-\tau_k)^2}{2\sigma_k^2}\right)\cos(\omega_k(t-\tau_k) + \phi_k)$
+- Context-conditioned amplitudes $A \in \mathbb{R}^{M\times D}$ and gates $z \in \mathbb{R}^M$ from observed mean
+- Sparsity loss with target activation $\rho = 0.3$
 - Spectral-guided initialization (atom frequencies = dominant FFT peaks; centers = energy peaks with local suppression)
 
 ### Training
 
-- **Loss**: \(\mathcal{L} = \mathcal{L}_{\text{rec}} + \lambda_r \mathcal{L}_{\text{dgf}} + \mathcal{L}_{\text{sparse}} + \lambda_m \mathcal{L}_{\text{smooth}}\)
-- **Scale annealing**: cosine schedule from \(\eta=1\) (broad atoms) to \(\eta=0\) (sharp atoms) after a 30% warmup
-- **Optimizer**: AdamW (lr \(10^{-3}\), weight decay \(10^{-4}\)), gradient clipping at 1.0
-- **Reparameterizations**: \(\sigma_k = \text{softplus}(\tilde\sigma_k) + \epsilon\), \(\omega_k = \text{softplus}(\tilde\omega_k)\)
+- **Loss**: $\mathcal{L} = \mathcal{L}_{\text{rec}} + \lambda_r \mathcal{L}_{\text{dgf}} + \mathcal{L}_{\text{sparse}} + \lambda_m \mathcal{L}_{\text{smooth}}$
+- **Scale annealing**: cosine schedule from $\eta=1$ (broad atoms) to $\eta=0$ (sharp atoms) after a 30% warmup
+- **Optimizer**: AdamW (lr $10^{-3}$, weight decay $10^{-4}$), gradient clipping at 1.0
+- **Reparameterizations**: $\sigma_k = \text{softplus}(\tilde\sigma_k) + \epsilon$, $\omega_k = \text{softplus}(\tilde\omega_k)$
 
 ## Experimental Results
 
@@ -150,7 +150,7 @@ DualTimesField/
 
 DualTimesField achieves the best MSE on all 9 benchmarks, with a 51.2% average MSE reduction and 29.8% average MAE reduction over the strongest deep-learning baseline (TimesNet). Largest gains: ETTm2 (96.9%), Weather (75.0%), ETTh2 (59.5%).
 
-### Interpolation on Irregularly Sampled Data (MSE ×10⁻³)
+### Interpolation on Irregularly Sampled Data (MSE $\times 10^{-3}$)
 
 <p align="center">
   <img src="pics/interpolation.png" alt="Interpolation results" width="95%">
@@ -167,7 +167,7 @@ On the ECG5000 dataset, the dual-field decomposition recovers clinically meaning
 - **Supraventricular** — dual activation peaks for the characteristic double-bump morphology
 - **PVC** — multiple distributed atoms capturing complex multi-component transients
 
-All reconstructions achieve MSE &lt; 1.2 × 10⁻².
+All reconstructions achieve MSE $< 1.2 \times 10^{-2}$.
 
 ## Datasets
 
@@ -236,16 +236,16 @@ predictions = model.predict(sample['times'])
 
 | Parameter | Symbol | Value | Parameter | Symbol | Value |
 |-----------|--------|-------|-----------|--------|-------|
-| Number of frequencies | \(K\) | 16 | DGF loss weight | \(\lambda_r\) | 0.1 |
-| Frequency cutoff | \(f_{\max}\) | 8.0 Hz | Smoothness weight | \(\lambda_m\) | 0.001 |
-| Hidden dimension | \(H\) | 64 | Base scale | \(\sigma_{\text{base}}\) | 0.1 |
-| Number of atoms | \(M\) | 16 | Scale floor | \(\epsilon\) | 0.02 |
-| Gate temperature | \(\alpha\) | 5 | Warmup ratio | \(e_{\text{warm}}/E\) | 0.3 |
-| Target sparsity | \(\rho\) | 0.3 | Learning rate | — | \(10^{-3}\) |
-| Sparsity penalty | \(\beta\) | 10 | Weight decay | — | \(10^{-4}\) |
-| Sparsity weight | \(\lambda_s\) | 0.001 | Gradient clip norm | — | 1.0 |
+| Number of frequencies | $K$ | 16 | DGF loss weight | $\lambda_r$ | 0.1 |
+| Frequency cutoff | $f_{\max}$ | 8.0 Hz | Smoothness weight | $\lambda_m$ | 0.001 |
+| Hidden dimension | $H$ | 64 | Base scale | $\sigma_{\text{base}}$ | 0.1 |
+| Number of atoms | $M$ | 16 | Scale floor | $\epsilon$ | 0.02 |
+| Gate temperature | $\alpha$ | 5 | Warmup ratio | $e_{\text{warm}}/E$ | 0.3 |
+| Target sparsity | $\rho$ | 0.3 | Learning rate | — | $10^{-3}$ |
+| Sparsity penalty | $\beta$ | 10 | Weight decay | — | $10^{-4}$ |
+| Sparsity weight | $\lambda_s$ | 0.001 | Gradient clip norm | — | 1.0 |
 
-Typical model size: ~35K parameters (\(D=7\), \(K=16\), \(M=16\), \(H=64\)). Training: 2–5 min for reconstruction (300 epochs, batch 32) and 10–30 min per sample for interpolation (500 epochs) on a single RTX 3090.
+Typical model size: ~35K parameters ($D=7$, $K=16$, $M=16$, $H=64$). Training: 2–5 min for reconstruction (300 epochs, batch 32) and 10–30 min per sample for interpolation (500 epochs) on a single RTX 3090.
 
 ## Citation
 
@@ -293,8 +293,6 @@ If you find this work useful, please cite:
 5. Human Activity protocol (Shukla & Marlin, ICLR 2021)
 
 ## Acknowledgments
-
-This work was supported by the National Natural Science Foundation of China (Grant No. 62462059).
 
 We thank the authors of the baseline methods for open-sourcing their implementations, and in particular:
 
