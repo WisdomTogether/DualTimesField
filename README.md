@@ -135,7 +135,12 @@ DualTimesField/
 
 ### Training
 
-- **Loss**: $\mathcal{L} = \mathcal{L}_{\text{rec}} + \lambda_r \mathcal{L}_{\text{dgf}} + \mathcal{L}_{\text{sparse}} + \lambda_m \mathcal{L}_{\text{smooth}}$
+The model is optimized with a multi-objective loss:
+
+$$
+\mathcal{L} = \mathcal{L}_{\text{rec}} + \lambda_r \mathcal{L}_{\text{dgf}} + \mathcal{L}_{\text{sparse}} + \lambda_m \mathcal{L}_{\text{smooth}}
+$$
+
 - **Scale annealing**: cosine schedule from $\eta=1$ (broad atoms) to $\eta=0$ (sharp atoms) after a 30% warmup
 - **Optimizer**: AdamW (lr $10^{-3}$, weight decay $10^{-4}$), gradient clipping at 1.0
 - **Reparameterizations**: $\sigma_k = \text{softplus}(\tilde\sigma_k) + \epsilon$, $\omega_k = \text{softplus}(\tilde\omega_k)$
@@ -247,7 +252,7 @@ predictions = model.predict(sample['times'])
 
 Typical model size: ~35K parameters ($D=7$, $K=16$, $M=16$, $H=64$). Training: 2–5 min for reconstruction (300 epochs, batch 32) and 10–30 min per sample for interpolation (500 epochs) on a single RTX 3090.
 
-## 🥳Citation
+## 🥳 Citation
 
 If you find this work useful, please cite:
 
